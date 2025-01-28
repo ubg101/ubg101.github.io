@@ -1,6 +1,6 @@
 .discord {
     background-color: #5765f2;
-    border-color: #5765f2;
+    border: 1px solid #5765f2;
     border-radius: 25px;
     margin-left: 10px;
 }
