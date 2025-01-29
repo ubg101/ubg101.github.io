@@ -119,23 +119,35 @@ body {
 }
 
 .ads {
-    flex: 0 0 22%;
-    max-width: 22%;
-    height: 100%;
+    flex: 0 0 25%;
+    max-width: 25%;
+    height: auto;
+    /* Ensure it adjusts based on ad content */
+    min-height: 250px;
+    /* Set a minimum height for ad display */
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    justify-content: space-between;
-    padding: 2px;
 }
 
-.ad1,
-.ad2 {
-    width: 100%;
-    height: 49%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.resad1 {
+    display: block;
+    /* Ensures it behaves like a block-level element */
+    margin: 0 auto;
+    /* Centers the div horizontally */
+    text-align: center;
+    /* Ensures content inside the div is centered */
+    margin-top: 20px;
+    margin-bottom: 15px;
+}
+
+.resad2 {
+    display: block;
+    /* Ensures it behaves like a block-level element */
+    margin: 0 auto;
+    /* Centers the div horizontally */
+    text-align: center;
+    /* Ensures content inside the div is centered */
 }
 
 .game-header {
