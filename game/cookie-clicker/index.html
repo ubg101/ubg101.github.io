@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Play Cookie Clicker Unblocked - ubg101</title>
+    <meta name="description"
+        content="Play Cookie Clicker Unblocked online. Learn about the addictive gameplay, tips, and strategies to maximize your cookie production.">
+    <meta name="robots" content="index, follow">
+    <link rel="icon" type="image/png" href="/images/ubg101.png" sizes="16x16">
+    <link rel="canonical" href="https://ubg101.github.io/game/cookie-clicker/" />
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-0PNRFG5PSL"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-0PNRFG5PSL');
+    </script>
+
+    <link href="/assets/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="/">
+                <img src="/images/ubg101.png" alt="Logo" class="rounded me-2" style="width: 40px; height: 40px;">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="discord nav-link flex items-center justify-center rounded-lg px-4"
+                            href="https://discord.gg/eKHxFRXe" target="_blank">
+                            Join Discord
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container py-4">
+        <h1 style="text-align: center;" class="mb-4">Cookie Clicker Unblocked - Play Anytime</h1>
+        <div class="resad1">
+            <script async
+                src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7606032375161967"
+                crossorigin="anonymous"></script>
+            <!-- ubg101 - Above Game -->
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-7606032375161967"
+                data-ad-slot="9740360892" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+
+        <div class="game-box">
+            <div class="game-container">
+                <div class="glass-panel">
+                    <h2 class="section-title">Achievements</h2>
+                    <div id="achievements"></div>
+                </div>
+
+                <div class="main-section glass-panel">
+                    <div class="counter">Cookies: <span id="cookie-count">0</span></div>
+                    <div class="cps">Per second: <span id="cps-count">0</span></div>
+                    <div class="cookie-wrapper">
+                        <img src="/images/cookie-clicker-unblocked.webp" alt="Cookie" class="cookie" id="cookie">
+                    </div>
+                </div>
+
+                <div class="glass-panel">
+                    <h2 class="section-title">Upgrades</h2>
+                    <div id="upgrades"></div>
+                </div>
+            </div>
+
+            <div class="notification" id="notification"></div>
+
+            <script>
+                // Same JavaScript code as before
+                class Game {
+                    constructor() {
+                        this.cookies = 0;
+                        this.cookiesPerClick = 1;
+                        this.cookiesPerSecond = 0;
+                        this.multiplier = 1;
+                        this.upgrades = [
+                            {
+                                id: 'cursor',
+                                name: 'Cursor',
+                                baseCost: 15,
+                                baseIncrease: 0.1,
+                                count: 0,
+                                description: 'Automates clicking'
+                            },
+                            {
+                                id: 'grandma',
+                                name: 'Grandma',
+                                baseCost: 100,
+                                baseIncrease: 1,
+                                count: 0,
+                                description: 'Bakes cookies'
+                            },
+                            {
+                                id: 'farm',
+                                name: 'Cookie Farm',
+                                baseCost: 1000,
+                                baseIncrease: 8,
+                                count: 0,
+                                description: 'Grows cookie plants'
+                            },
+                            {
+                                id: 'factory',
+                                name: 'Cookie Factory',
+                                baseCost: 10000,
+                                baseIncrease: 47,
+                                count: 0,
+                                description: 'Mass produces cookies'
+                            }
+                        ];
+                        this.achievements = [
+                            {
+                                id: 'beginner',
+                                name: 'Cookie Beginner',
+                                description: 'Bake 100 cookies',
+                                requirement: () => this.cookies >= 100,
+                                unlocked: false
+                            },
+                            {
+                                id: 'amateur',
+                                name: 'Cookie Amateur',
+                                description: 'Bake 1,000 cookies',
+                                requirement: () => this.cookies >= 1000,
+                                unlocked: false
+                            },
+                            {
+                                id: 'professional',
+                                name: 'Cookie Professional',
+                                description: 'Bake 10,000 cookies',
+                                requirement: () => this.cookies >= 10000,
+                                unlocked: false
+                            }
+                        ];
+
+                        this.setupEventListeners();
+                        this.updateDisplay();
+                        this.startGameLoop();
+                    }
+
+                    setupEventListeners() {
+                        document.getElementById('cookie').addEventListener('click', () => this.clickCookie());
+                        document.getElementById('upgrades').addEventListener('click', (e) => {
+                            const upgradeId = e.target.closest('.upgrade-item')?.dataset.id;
+                            if (upgradeId) this.buyUpgrade(upgradeId);
+                        });
+                    }
+
+                    clickCookie() {
+                        const increase = this.cookiesPerClick * this.multiplier;
+                        this.cookies += increase;
+                        this.createFloatingNumber(increase);
+                        this.updateDisplay();
+                        this.checkAchievements();
+                    }
+
+                    createFloatingNumber(number) {
+                        const cookie = document.getElementById('cookie');
+                        const rect = cookie.getBoundingClientRect();
+                        const floatingNumber = document.createElement('div');
+                        floatingNumber.className = 'floating-number';
+                        floatingNumber.textContent = `+${number}`;
+                        floatingNumber.style.left = `${rect.left + Math.random() * rect.width}px`;
+                        floatingNumber.style.top = `${rect.top + rect.height / 2}px`;
+                        document.body.appendChild(floatingNumber);
+                        setTimeout(() => floatingNumber.remove(), 1000);
+                    }
+
+                    buyUpgrade(upgradeId) {
+                        const upgrade = this.upgrades.find(u => u.id === upgradeId);
+                        const cost = this.calculateUpgradeCost(upgrade);
+
+                        if (this.cookies >= cost) {
+                            this.cookies -= cost;
+                            upgrade.count++;
+                            this.cookiesPerSecond += upgrade.baseIncrease;
+                            this.showNotification(`Bought ${upgrade.name}!`);
+                            this.updateDisplay();
+                        }
+                    }
+
+                    calculateUpgradeCost(upgrade) {
+                        return Math.floor(upgrade.baseCost * Math.pow(1.15, upgrade.count));
+                    }
+
+                    checkAchievements() {
+                        let newAchievements = false;
+                        this.achievements.forEach(achievement => {
+                            if (!achievement.unlocked && achievement.requirement()) {
+                                achievement.unlocked = true;
+                                newAchievements = true;
+                                this.showNotification(`Achievement unlocked: ${achievement.name}!`);
+                            }
+                        });
+                        if (newAchievements) {
+                            this.updateDisplay();
+                        }
+                    }
+
+                    showNotification(message) {
+                        const notification = document.getElementById('notification');
+                        notification.textContent = message;
+                        notification.style.opacity = '1';
+                        setTimeout(() => {
+                            notification.style.opacity = '0';
+                        }, 2000);
+                    }
+
+                    updateDisplay() {
+                        document.getElementById('cookie-count').textContent = Math.floor(this.cookies);
+                        document.getElementById('cps-count').textContent = this.cookiesPerSecond.toFixed(1);
+
+                        // Update upgrades
+                        const upgradesContainer = document.getElementById('upgrades');
+                        upgradesContainer.innerHTML = this.upgrades.map(upgrade => {
+                            const cost = this.calculateUpgradeCost(upgrade);
+                            const canAfford = this.cookies >= cost;
+                            return `
+                                    <div class="upgrade-item ${canAfford ? '' : 'disabled'}" data-id="${upgrade.id}">
+                                        <div class="upgrade-title">
+                                            <span>${upgrade.name} (${upgrade.count})</span>
+                                            <span>${cost} cookies</span>
+                                        </div>
+                                        <div class="upgrade-description">${upgrade.description}</div>
+                                    </div>
+                                `;
+                        }).join('');
+
+                        // Update achievements
+                        const achievementsContainer = document.getElementById('achievements');
+                        achievementsContainer.innerHTML = this.achievements.map(achievement => `
+                                <div class="achievement ${achievement.unlocked ? 'unlocked' : ''}">
+                                    <div class="achievement-title">${achievement.name}</div>
+                                    <div class="achievement-description">${achievement.description}</div>
+                                </div>
+                            `).join('');
+                    }
+
+                    startGameLoop() {
+                        setInterval(() => {
+                            this.cookies += this.cookiesPerSecond;
+                            this.updateDisplay();
+                            this.checkAchievements();
+                        }, 1000);
+                    }
+                }
+
+                // Start the game
+                const game = new Game();
+            </script>
+        </div>
+        <style>
+            .game-title {
+                font-size: 2.5rem;
+                font-weight: 600;
+                margin: 2rem 0;
+                background: linear-gradient(45deg, #ff6b6b, #feca57);
+                -webkit-text-fill-color: transparent;
+                text-shadow: 0 0 20px rgba(254, 202, 87, 0.3);
+            }
+
+            .game-container {
+                display: grid;
+                grid-template-columns: 1fr 2fr 1fr;
+                gap: 2rem;
+                padding: 2rem;
+                max-width: 1400px;
+                width: 95%;
+                margin: 0 auto;
+            }
+
+            .glass-panel {
+                background: rgba(255, 255, 255, 0.05);
+                backdrop-filter: blur(10px);
+                border-radius: 20px;
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                padding: 1.5rem;
+                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            }
+
+            .main-section {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 2rem;
+                text-align: center;
+            }
+
+            .cookie-wrapper {
+                position: relative;
+                width: 250px;
+                height: 250px;
+                cursor: pointer;
+                transition: transform 0.2s ease;
+            }
+
+            .cookie-wrapper:hover {
+                transform: scale(1.05);
+            }
+
+            .cookie-wrapper:active {
+                transform: scale(0.95);
+            }
+
+            .cookie {
+                width: 100%;
+                height: 100%;
+                border-radius: 50%;
+                transition: all 0.3s ease;
+                filter: drop-shadow(0 0 20px rgba(254, 202, 87, 0.3));
+            }
+
+            .counter {
+                font-size: 2.5rem;
+                font-weight: 700;
+                color: #feca57;
+                text-shadow: 0 0 10px rgba(254, 202, 87, 0.3);
+            }
+
+            .cps {
+                font-size: 1.2rem;
+                color: rgba(255, 255, 255, 0.7);
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+                font-weight: 600;
+                margin-bottom: 1rem;
+                color: #ff6b6b;
+            }
+
+            .upgrade-item {
+                background: rgba(255, 255, 255, 0.05);
+                border-radius: 12px;
+                padding: 1rem;
+                margin: 0.8rem 0;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                border: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            .upgrade-item:hover:not(.disabled) {
+                background: rgba(255, 255, 255, 0.1);
+                transform: translateY(-2px);
+            }
+
+            .upgrade-item.disabled {
+                opacity: 0.5;
+                cursor: not-allowed;
+            }
+
+            .upgrade-title {
+                font-weight: 500;
+                color: #feca57;
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 0.5rem;
+            }
+
+            .upgrade-description {
+                font-size: 0.9rem;
+                color: rgba(255, 255, 255, 0.7);
+            }
+
+            .achievement {
+                background: rgba(255, 255, 255, 0.05);
+                border-radius: 12px;
+                padding: 1rem;
+                margin: 0.8rem 0;
+                transition: all 0.3s ease;
+            }
+
+            .achievement.unlocked {
+                background: rgba(76, 175, 80, 0.2);
+                border: 1px solid rgba(76, 175, 80, 0.3);
+            }
+
+            .achievement-title {
+                font-weight: 500;
+                color: #4CAF50;
+                margin-bottom: 0.5rem;
+            }
+
+            .achievement-description {
+                font-size: 0.9rem;
+                color: rgba(255, 255, 255, 0.7);
+            }
+
+            .notification {
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                padding: 1rem 1.5rem;
+                background: rgba(76, 175, 80, 0.9);
+                color: white;
+                border-radius: 12px;
+                opacity: 0;
+                transition: all 0.3s ease;
+                backdrop-filter: blur(10px);
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+                z-index: 1000;
+            }
+
+            @keyframes float {
+                0% {
+                    transform: translateY(0px) scale(1);
+                    opacity: 1;
+                }
+
+                100% {
+                    transform: translateY(-100px) scale(1.2);
+                    opacity: 0;
+                }
+            }
+
+            .floating-number {
+                position: absolute;
+                animation: float 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+                pointer-events: none;
+                font-weight: 600;
+                color: #feca57;
+                text-shadow: 0 0 10px rgba(254, 202, 87, 0.3);
+                font-size: 1.2rem;
+            }
+
+            @media (max-width: 1024px) {
+                .game-container {
+                    grid-template-columns: 1fr;
+                    grid-template-rows: auto auto auto;
+                }
+            }
+        </style>
+
+        <div class="resad2">
+            <script async
+                src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7606032375161967"
+                crossorigin="anonymous"></script>
+            <!-- ubg101 - BelowGame -->
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-7606032375161967"
+                data-ad-slot="7222008768" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+
+
+
+
+        <section>
+            <h2 class="mb-4 mt-4">Popular Games</h2>
+
+            <div class="row g-4">
+                <!-- Game Card -->
+                <a href="/play/drift-hunters-unblocked/" class="game col-12 col-sm-6 col-md-4 col-lg-3">
+                    <div class="game-card rounded overflow-hidden">
+                        <img src="/images/drif-hunters.jpeg" alt="Drift Hunters" class="game-image w-100">
+                        <div class="p-3">
+                            <h3 class="h5 mb-2">Drift Hunters</h3>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Game Card -->
+                <a href="/play/eggy-car-unblocked/" class="game col-12 col-sm-6 col-md-4 col-lg-3">
+                    <div class="game-card rounded overflow-hidden">
+                        <img src="/images/eggy-car.webp" alt="Eggy Car" class="game-image w-100">
+                        <div class="p-3">
+                            <h3 class="h5 mb-2">Eggy Car</h3>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Game Card -->
+                <a href="/play/block-blast-unblocked/" class="game col-12 col-sm-6 col-md-4 col-lg-3">
+                    <div class="game-card rounded overflow-hidden">
+                        <img src="/images/block-blast.jpg" alt="Block Blast" class="game-image w-100">
+                        <div class="p-3">
+                            <h3 class="h5 mb-2">Block Blast</h3>
+                        </div>
+                    </div>
+                </a>
+
+
+            </div>
+        </section>
+
+        <section>
+            <article style="width: 70%; margin-left: 15%; margin-top: 180px;">
+                <div class="resad2">
+                    <script async
+                        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7606032375161967"
+                        crossorigin="anonymous"></script>
+                    <!-- ubg101 - BelowGame -->
+                    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-7606032375161967"
+                        data-ad-slot="7222008768" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                    <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                </div>
+
+                <section>
+                    <h2>What Is Cookie Clicker?</h2>
+                    <p>Cookie Clicker is an immensely popular incremental game where the objective is simple yet
+                        addictive: bake as many
+                        cookies as possible. Starting with a single click to produce cookies, players can later invest
+                        in upgrades and
+                        automated production tools, creating an endlessly satisfying feedback loop.</p>
+                </section>
+
+                <section>
+                    <h2>Why Play Cookie Clicker Unblocked?</h2>
+                    <p>Many schools, offices, and networks block access to gaming websites, leaving players unable to
+                        enjoy their
+                        favorite games during breaks. Cookie Clicker Unblocked provides a solution by allowing access to
+                        the game on any
+                        device or network without restrictions.</p>
+                </section>
+
+                <section>
+                    <h2>How to Access Cookie Clicker Unblocked</h2>
+                    <p>Playing Cookie Clicker Unblocked is easy and requires no downloads. Simply follow these steps:
+                    </p>
+                    <ol>
+                        <li>Search for a trusted website offering <strong>Cookie Clicker Unblocked</strong>.</li>
+                        <li>Click on the game link to start playing instantly in your browser.</li>
+                        <li>Enjoy the endless cookie-baking fun!</li>
+                    </ol>
+                </section>
+
+                <section>
+                    <h2>Tips for Maximizing Cookie Production</h2>
+                    <p>To become a Cookie Clicker master, follow these tips:</p>
+                    <ul>
+                        <li>Focus on purchasing upgrades that automate cookie production.</li>
+                        <li>Prioritize buildings like Grandmas, Farms, and Factories for exponential growth.</li>
+                        <li>Keep an eye out for Golden Cookies to earn massive bonuses.</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Conclusion</h2>
+                    <p>Cookie Clicker Unblocked is the perfect way to pass time and indulge in some casual gaming. With
+                        its simple yet
+                        addictive gameplay, it’s no wonder this game has captivated millions of players worldwide.
+                        Whether you're at
+                        school, work, or just looking to unwind, give Cookie Clicker Unblocked a try and start baking
+                        cookies today!</p>
+                </section>
+            </article>
+        </section>
+
+    </main>
+
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row gy-4">
+                <div class="col-12 col-md-4">
+                    <p class="h5 mb-3">About Us</p>
+                    <p class="text-light">Play the best free online games on your smartphone, tablet, or PC. We have the
+                        best arcade, match-3, bubble shooter, racing, and more games!</p>
+                </div>
+                <div class="col-12 col-md-4">
+                    <!-- <h3 class="h5 mb-3">Categories</h3>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-light text-decoration-none mb-2 d-block">Action Games</a></li>
+                        <li><a href="#" class="text-light text-decoration-none mb-2 d-block">Racing Games</a></li>
+                        <li><a href="#" class="text-light text-decoration-none mb-2 d-block">Puzzle Games</a></li>
+                        <li><a href="#" class="text-light text-decoration-none mb-2 d-block">Sports Games</a></li>
+                    </ul> -->
+                </div>
+                <div class="col-12 col-md-4">
+                    <p class="h5 mb-3">Quick Links</p>
+                    <ul class="list-unstyled">
+                        <li><a href="/" class="text-light text-decoration-none mb-2 d-block">Home</a></li>
+                        <li><a href="/about/" class="text-light text-decoration-none mb-2 d-block">About Us</a></li>
+                        <li><a href="/contact/" class="text-light text-decoration-none mb-2 d-block">Contact Us</a></li>
+                        <li><a href="/privacy-policy/" class="text-light text-decoration-none mb-2 d-block">Privacy
+                                Policy</a></li>
+                    </ul>
+                </div>
+
+            </div>
+            <div class="row mt-4 pt-4 border-top border-secondary">
+                <div class="col-12 text-center text-light">
+                    <p class="mb-0">&copy; UBG101. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/script.js"></script>
+
+</body>
+
+</html>
